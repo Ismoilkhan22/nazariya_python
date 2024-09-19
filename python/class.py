@@ -8,64 +8,54 @@ class Person:
         return self.__name
  
     def display_info(self):
-        print(f"Name: {self.__name} ")
+        print(f"Name: {self.__name}")
  
  
 class Employee(Person):
+ 
+    def __init__(self, name, company):
+        super().__init__(name)
+        self.company = company
+ 
+    def display_info(self):
+        super().display_info()
+        print(f"Company: {self.company}")
  
     def work(self):
         print(f"{self.name} works")
  
  
-tom = Employee("Tom")
-print(tom.name)     # Tom
-tom.display_info()  # Name: Tom 
-tom.work()          # Tom works
+tom = Employee("Tom", "Microsoft")
+tom.display_info()  # Name: Tom
+                    # Company: Microsoft
+
+# Super() ifodasi asosiy sinfga kirish uchun ishlatiladi . Shunday qilib, Employee konstruktorida qo'ng'iroq qilinadi:
+# super().__init__(name)
+"""
+Ushbu ibora xodim nomidan o'tgan Person sinfining konstruktoriga qo'ng'iroqni ifodalaydi. 
+Va bu mantiqiy. Axir, xodimning ismi Person sinfining konstruktorida aniq belgilanadi. 
+Xodimlar konstruktorining o'zida biz faqat kompaniya mulkini o'rnatamiz.
+
+display_info()Bundan tashqari, Employee klassi xodim kompaniyasining mahsulotini qo'shish usulini bekor qiladi . 
+Bundan tashqari, biz ushbu usulni quyidagicha belgilashimiz mumkin:
+"""
+
+def display_info(self):
+    print(f"Name: {self.name}")
+    print(f"Company: {self.company}")
 
 """
-Employee klassi Person sinfining funksiyalarini to'liq o'z zimmasiga oladi, faqat work(). 
-Shunga ko'ra, Employee ob'ektini yaratishda biz Persondan meros qilib olingan konstruktordan foydalanishimiz mumkin:
+Ammo keyin nom chiqarish liniyasi Person sinfidagi kodni takrorlaydi. 
+Agar kodning ushbu qismi Person sinfidagi usul bilan bir xil bo'lsa, uni takrorlashning ma'nosi yo'q, 
+shuning uchun yana super() ifodasidan foydalanib, biz
+ Person sinfida display_info usulini amalga oshirishga murojaat qilamiz:
 """
+def display_info(self):
+    super().display_info()      # обращение к методу display_info в классе Person
+    print(f"Company: {self.company}")
 
-
-# Python tilining o'ziga xos xususiyatlaridan biri uning bir nechta merosni qo'llab-quvvatlashidir,
-#  ya'ni bitta sinf bir nechta sinflardan meros bo'lishi mumkin:
-
-
-#  класс работника
-class Employee:
-    def work(self):
-        print("Employee works")
- 
- 
-#  класс студента
-class Student:
-    def study(self):
-        print("Student studies")
- 
- 
-class WorkingStudent(Employee, Student):        # Наследование от классов Employee и Student
-    pass
- 
- 
-# класс работающего студента
-tom = WorkingStudent()
-tom.work()      # Employee works
-tom.study()     # Student studies
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Keyin biz ushbu sinf ob'ektini yaratish va display_info usulini chaqirish uchun
+#  Employee konstruktorini chaqirishimiz mumkin:
 
 
 
